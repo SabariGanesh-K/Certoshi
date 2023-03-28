@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-
+// import Certification from "../contracts/Certification.json";
 //Decrypt Function (Utility Function)
 import { decrypt } from "./decrypt";
 
@@ -112,6 +112,7 @@ function CertificateDisplay() {
   const classes = useStyles();
 
   let web3;
+
   const connectWeb3 = () => {
     if (
       process.env.NODE_ENV === "development" &&
@@ -169,46 +170,87 @@ function CertificateDisplay() {
       "REACT_APP_INFURA_PROJECT_ENDPOINT",
       process.env.REACT_APP_INFURA_PROJECT_ENDPOINT
     );
-    connectWeb3();
-    getCertificateData(id)
-      .then((data) => {
-        console.log("Here's the retrieved certificate data of id", id);
-        console.log(data);
-        try {
-          console.log("candidateName", data[0], decrypt(data[0], id));
-          console.log("courseName", data[1]);
-          console.log("creationDate", data[2], decrypt(data[2], id));
-          console.log("instituteName", data[3]);
-          console.log("instituteAcronym", data[4]);
-          console.log("instituteLink", data[5]);
-          console.log("revoked", data[6]);
+    const loadWeb3Metamask=async() =>{
+      if (window.ethereum) {
+        window.web3 = new Web3(window.ethereum);
+        await window.ethereum.enable();
+      
+      } else if (window.web3) {
+        window.web3 = new Web3(window.web3.currentProvider);
+       
+      } else {
+        // window.alert(
+        //   "Non-Ethereum browser detected. You should consider trying MetaMask!"
+        // );
+        
+     
+      }
+    }
+    loadWeb3Metamask();
+    const getData=async() =>{
+      const web3 = window.web3;
+      let networkId;
+      networkId = await web3.eth.net.getId();
+      const certification = new web3.eth.Contract(
+        Certification.abi,
+        "0x40A8b04351543FF894e5671bFeE882079C11B702"
+      );
+      try{
+        const data =  await certification.methods.getData(id).call()
+        console.log(data)
+        console.log("candidateName", data[0], decrypt(data[0], id));
+        console.log("courseName", data[1]);
+        console.log("creationDate", data[2], decrypt(data[2], id));
+        console.log("instituteName", data[3]);
+        console.log("instituteAcronym", data[4]);
+        console.log("instituteLink", data[5]);
+        console.log("revoked", data[6]);
 
-          setCertData((prev) => ({
-            ...prev,
-            candidateName: decrypt(data[0], id),
-            courseName: data[1],
-            creationDate: decrypt(data[2], id),
-            instituteName: data[3],
-            instituteAcronym: data[4],
-            instituteLink: data[5],
-            revoked: data[6],
-          }));
+        setCertData((prev) => ({
+          ...prev,
+          candidateName: decrypt(data[0], id),
+          courseName: data[1],
+          creationDate: decrypt(data[2], id),
+          instituteName: data[3],
+          instituteAcronym: data[4],
+          instituteLink: data[5],
+          revoked: data[6],
+        }));
 
-          setCertExists(true);
-          setLoading(false);
-        } catch (err) {
-          // TODO: Remove this try catch block.
-          // Should not enter here at all. Catching just in case
-          setCertExists(false); //remove
-          setLoading(false);
-        }
-      })
-      .catch((err) => {
-        console.log("Certificate of id", id, "does not exist");
+        setCertExists(true);
+        setLoading(false);
+
+      }
+      catch(error){
+        console.log(error)
         setCertExists(false);
         setLoading(false);
-      });
-  }, []);
+
+      }
+   
+    
+    // getCertificateData(id)
+    //   .then((data) => {
+    //     console.log("Here's the retrieved certificate data of id", id);
+    //     console.log(data);
+        // try {
+     
+    //     } catch (err) {
+    //       // TODO: Remove this try catch block.
+    //       // Should not enter here at all. Catching just in case
+    //       setCertExists(false); //remove
+    //       setLoading(false);
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log("Certificate of id", id, "does not exist");
+    //     setCertExists(false);
+    //     setLoading(false);
+    //   });
+  }
+
+  getData()
+}, []);
   return (
     <>
       <Grid container className={classes.root} justifyContent="center">

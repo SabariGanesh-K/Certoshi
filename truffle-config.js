@@ -7,14 +7,14 @@ module.exports = {
         rinkeby: {
             provider: function() {
                 return new HDWalletProvider(
-                    process.env.MNEMONIC,
-                    process.env.PROJECT_ENDPOINT,
+                   "merit seek float marine filter put extra pair bus sock cousin plate",
+                    "https://goerli.infura.io/v3/b18c4ea513a9462298cfa29c5376e047",
                     address_index=0,
                     num_addresses=2
                 );
             },
-            network_id: 4,
-            // gas: 4500000,
+            network_id: 5,
+            gas: 4612388,
             // gasPrice: 10000000000,
         },
         development: {

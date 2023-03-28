@@ -165,7 +165,7 @@ class Admin extends React.Component {
       const accounts = await web3.eth.getAccounts();
       let caller = accounts[0];
       console.log("caller", caller);
-
+      // 0x9Bc280490398BCf0b875C7f00Dc335BC815Ed356
       const networkId = await web3.eth.net.getId();
       // TODO: You can use this - can remove the try catch blocks
       // if (!(networkId in Institution.networks)) {

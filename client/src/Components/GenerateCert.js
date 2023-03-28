@@ -253,7 +253,7 @@ class GenerateCert extends React.Component {
     const accounts = await web3.eth.getAccounts();
     console.log(3);
     let caller = accounts[0];
-    console.log(4);
+    console.log(4,caller);
 
     // TODO: Fix bug
     let networkId;
@@ -423,9 +423,10 @@ class GenerateCert extends React.Component {
     let caller = accounts[0];
     const networkId = await web3.eth.net.getId();
     const certificationData = Certification.networks[networkId];
+    console.log(certificationData)
     const certification = new web3.eth.Contract(
       Certification.abi,
-      certificationData.address
+      "0x40A8b04351543FF894e5671bFeE882079C11B702"
     );
     try {
       await certification.methods

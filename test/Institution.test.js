@@ -10,23 +10,41 @@ contract("Institution", (accounts) => {
     let mockInstituteAcc = accounts[1];
     let mockRandomInvalidAcc = accounts[2];
     let mockInstitute = {
-        instituteName: "Singapore University of Technology and Design",
-        instituteAcronym: "SUTD",
-        instituteLink: "https://sutd.edu.sg/",
+        instituteName: "Vellore Institute of Technology",
+        instituteAcronym: "VIT",
+        instituteLink: "https://chennai.vit.ac.in/",
     };
     let mockInstituteCourses = [{
-            course_name: "Computer Science and Design",
-        },
-        {
-            course_name: "Engineering Product and Development",
-        },
-        {
-            course_name: "Engineering Systems and Design",
-        },
-        {
-            course_name: "Architecture and Sustainable Design",
-        },
-    ];
+            course_name: "B.Tech in Computer Science and Engineering",
+},
+{
+course_name: "B.Tech in Electronics and Communication Engineering",
+},
+{
+course_name: "B.Tech in Mechanical Engineering",
+},
+{
+course_name: "B.Tech in Civil Engineering",
+},
+{
+course_name: "B.Tech in Chemical Engineering",
+},
+{
+course_name: "B.Tech in Information Technology",
+},
+{
+course_name: "B.Tech in Biotechnology",
+},
+{
+course_name: "B.Arch in Architecture",
+},
+{
+course_name: "M.Tech in Computer Science and Engineering",
+},
+{
+course_name: "M.Tech in Mechanical Engineering",
+},
+];
 
     before(async() => {
         // Load Contracts
