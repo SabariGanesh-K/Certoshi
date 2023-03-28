@@ -63,10 +63,7 @@ function Home() {
             <Box style={{ fontSize: "60px", fontWeight: "900" }}>VITCert</Box>
             <Box m={1.5} />
             <Typography variant="body2">
-              A Decentralized Certificate Issuance and Verification System to
-              create certificates that are Immutable, Cryptographically Secured,
-              and have Zero Downtime. All powered by decentralized Ethereum
-              Smart Contracts{" "}
+              Vellore Institute of Technology presents a cutting-edge system for creating and verifying certificates that is decentralized and utilizes Ethereum Smart Contracts. This innovative system guarantees the immutability and cryptographic security of certificates, as well as zero downtime for its users.{" "}
             </Typography>
             <Box m={1.5} />
             <Typography variant="h6">What are you looking for</Typography>
