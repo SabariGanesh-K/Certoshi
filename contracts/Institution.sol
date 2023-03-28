@@ -1,4 +1,5 @@
-pragma solidity ^0.5.0;
+pragma solidity >0.4.20;
+
 pragma experimental ABIEncoderV2;
 
 import "./Certification.sol";
